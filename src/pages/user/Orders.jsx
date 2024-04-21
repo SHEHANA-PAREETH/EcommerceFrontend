@@ -5,7 +5,7 @@ import { Container, Row, Col, Card,Button } from 'react-bootstrap';
 import { loadStripe } from '@stripe/stripe-js';
 import { useSelector } from 'react-redux';
 
-const stripePromise = loadStripe('pk_test_51P65lNSC8qQELg2OZ4qru9qShzAHtdVAjfYb7etfXp5oVf4Q4yG7FzfDGwFbcuf2EMMpJs1SM9GULVAZmVJb18Wl00NntrIAUr');
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 
 function Orders() {
