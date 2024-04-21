@@ -1,0 +1,30 @@
+.category-item{
+    border: 2px solid hotpink;
+    display: inline-block;
+    min-width: 90px;
+    padding: 10px 15px;
+    margin: 15px;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.category-item:hover,.category-submit-button:hover{
+    background-color: hotpink;
+    color:white;
+    cursor: pointer;
+   border: none;
+}
+.category-submit-button{
+    border: 2px solid hotpink;
+    color: black;
+    background-color: white;
+    margin-top: 5px;
+}
+
+.category-top-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

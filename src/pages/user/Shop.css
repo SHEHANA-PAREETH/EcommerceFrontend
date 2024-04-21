@@ -1,0 +1,23 @@
+
+.category-navbar{
+    background-color:rgba(0,0,0,0.1);
+    height: 80vh;
+   
+}
+@media (max-width:576px){
+.category-navbar{
+    width:80%;
+    margin: auto ;
+}
+}
+@media (min-width:576px){
+    .category-navbar{
+       position: fixed;
+       left: 30px;
+       width:30%;
+    }
+    .product-container{
+position:absolute;
+right:0;
+    }
+}
