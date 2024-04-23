@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SpinnerComponent from './SpinnerComponent'
 import {Container,Row,Col} from 'react-bootstrap'
 import axios from 'axios'
-import { BASE_URL } from '../constants';
+
 import CarouselComponent from './CarousalComponent';
 import ProductCard from './ProductCard';
 function Header() {
@@ -14,7 +14,7 @@ function Header() {
         getAllProducts()
     },[])
     const getAllProducts=()=>{
-        axios.get(`${BASE_URL}/api/product/allproducts`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/allproducts`).then((resp)=>{
             console.log(resp.data);
             setProductData(resp.data)
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { BASE_URL } from '../constants';
+
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { ToastSuccess } from '../plugins/toast';
@@ -15,7 +15,7 @@ axios.defaults.withCredentials = true
         console.log(updatedValue);
        console.log(selectedCategory._id);
        const categoryId= selectedCategory._id 
-       axios.put(`${BASE_URL}/api/category/${categoryId}/`,{
+       axios.put(`${process.env.REACT_APP_BASE_URL}/api/category/${categoryId}/`,{
         name:updatedValue
        }).then((res)=>{
         console.log(res);
@@ -37,7 +37,7 @@ axios.defaults.withCredentials = true
     }).then((result)=>{
 if(result){
  const categoryId= selectedCategory._id
-axios.delete(`${BASE_URL}/api/category/${categoryId}`).then((resp)=>{
+axios.delete(`${process.env.REACT_APP_BASE_URL}/api/category/${categoryId}`).then((resp)=>{
   console.log(resp);
   if(resp.data){
     setModal(false)

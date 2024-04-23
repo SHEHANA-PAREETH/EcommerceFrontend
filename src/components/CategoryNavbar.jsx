@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 import { Container,Row,Col } from 'react-bootstrap';
-import { BASE_URL } from '../constants';
+
 
 function CategoryNavbar() {
     axios.defaults.withCredentials = true
@@ -15,7 +15,7 @@ function CategoryNavbar() {
 getallCategories()
     },[])
     const getallCategories=()=>{
-        axios.get(`${BASE_URL}/api/category/`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/`).then((resp)=>{
             //console.log(resp.data);
             setCategoryList(resp.data)
         })

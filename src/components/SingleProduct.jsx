@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Form ,Image,Table} from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { BASE_URL } from '../constants';
+
 import {Container,Row,Col} from 'react-bootstrap'
 import { SiBrandfolder } from "react-icons/si";
 import { MdProductionQuantityLimits } from "react-icons/md";
@@ -35,7 +35,7 @@ function SingleProduct() {
         getSingleProduct()
     },[])
     const getSingleProduct=()=>{
-        axios.get(`${BASE_URL}/api/product/${id}`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/${id}`).then((resp)=>{
           console.log(resp.data);
     setData(resp.data)
     
@@ -79,7 +79,7 @@ setActiveTab(tab)
 <Container>
       <Row>
         <Col xs={12} sm={12} md={5}>
-          <Image src={`${BASE_URL}/uploads/${data?.image}`} style={{height:"500px"}} alt="" fluid />
+          <Image src={`${process.env.REACT_APP_BASE_URL}/uploads/${data?.image}`} style={{height:"500px"}} alt="" fluid />
           <h4>{data?.name}</h4>
         </Col>
         <Col xs={12} sm={12} md={7}>

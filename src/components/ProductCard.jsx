@@ -1,5 +1,5 @@
 import React from 'react'
-import { BASE_URL } from '../constants'
+
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap';
 
@@ -10,7 +10,7 @@ function ProductCard({pdt}) {
    <Card className='m-3 shadow-sm' style={{ width:'250px',zIndex:"-1"}}>
       
       
-        <Card.Img variant='top' src={`${BASE_URL}/uploads/${pdt.image}`} alt={pdt.name} style={{ objectFit: 'contain', width: '100%', height: '200px' }}/>
+        <Card.Img variant='top' src={`${process.env.REACT_APP_BASE_URL}/uploads/${pdt.image}`} alt={pdt.name} style={{ objectFit: 'contain', width: '100%', height: '200px' }}/>
         <Card.Body style={{ backgroundColor: 'rgba(0,0,0,.7)', color: 'white' ,height:"150px"}}>
           <Card.Title className='text-center'>{pdt.name.slice(0, 50)}...</Card.Title>
           <div className='d-flex justify-content-center align-items-center'>

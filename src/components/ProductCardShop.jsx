@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import { BASE_URL } from '../constants'
+
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../toolkit/cartSlice';
@@ -21,7 +21,7 @@ navigate('/cart')
      <span  className=' bg-dark text-light rounded  position-absolute end-0'>
     {pdt.brand}
 </span>
-<img className='cursor-pointer' src={`${BASE_URL}/uploads/${pdt.image}`} style={{width:'130px',objectFit:"contain",height:"200px"}} alt="" />
+<img className='cursor-pointer' src={`${process.env.REACT_APP_BASE_URL}/uploads/${pdt.image}`} style={{width:'130px',objectFit:"contain",height:"200px"}} alt="" />
 <div className='d-flex justify-content-between'>
     <h6>{pdt.name.slice(0,10)}</h6>
     <h6>{pdt.price}</h6>

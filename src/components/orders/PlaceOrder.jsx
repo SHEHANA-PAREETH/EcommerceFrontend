@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
-import ProgressSteps from './ProgressSteps'
-import { BASE_URL } from '../../constants'
+
 import { Table } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import axios from 'axios';
@@ -16,7 +15,7 @@ function PlaceOrder() {
     const cart = useSelector(state=>state.cart)
    const placeOrderHandler=async()=>{
     try{
-      const resp = await axios.post(`${BASE_URL}/api/orders/`,{
+      const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/orders/`,{
         orderItems: cart.cartItems,
         shippingAddress:cart.shippingAddress,
         paymentMethod:cart.paymentMethod,
@@ -60,7 +59,7 @@ catch(error){
         {cart.cartItems.map((item, index) => (
           <tr key={index}>
             <td>
-              <img src={`${BASE_URL}/uploads/${item.image}`} style={{ height: "100px",width:"100px" }} alt="" />
+              <img src={`${process.env.REACT_APP_BASE_URL}/uploads/${item.image}`} style={{ height: "100px",width:"100px" }} alt="" />
             </td>
             <td>{item.name}</td>
             <td>{item.qty}</td>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button ,Form} from 'react-bootstrap'
-import { BASE_URL } from '../../constants';
+;
 import axios from 'axios';
 import { ToastError, ToastSuccess } from '../../plugins/toast';
 import {useNavigate} from 'react-router-dom'
@@ -24,7 +24,7 @@ function ProductCreate() {
 getAllCategories()
     },[])
     const getAllCategories=()=>{
-        axios.get(`${BASE_URL}/api/category/`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/`).then((resp)=>{
             //console.log(resp.data);
             setCategoryList(resp.data)
         })
@@ -66,7 +66,7 @@ getAllCategories()
     
       
         console.log(productData);
-        axios.post(`${BASE_URL}/api/product`, productData, {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product`, productData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

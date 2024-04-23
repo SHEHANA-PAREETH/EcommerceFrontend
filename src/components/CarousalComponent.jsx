@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../constants';
+
 import {Carousel} from 'react-bootstrap'
 import { CgOverflow } from 'react-icons/cg';
 
@@ -22,7 +22,7 @@ const CarouselComponent = ({productData}) => {
         <div className=' border border-5 shadow-sm rounded d-flex justify-content-center align-items-center' style={{backgroundColor:"rgb(0,0,0)"}} >
         <img style={{height:"75vh",width:"100%"}}
               className="rounded"
-              src={`${BASE_URL}/uploads/${pdt.image}`}
+              src={`${process.env.REACT_APP_BASE_URL}/uploads/${pdt.image}`}
               alt={`Slide ${index}`}
             />
         <Carousel.Caption className='d-flex flex-column align-items-center mb-5'>

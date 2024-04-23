@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../constants'
+
 import axios from 'axios';
 import { Container, Row, Col, Card,Button } from 'react-bootstrap';
 import { loadStripe } from '@stripe/stripe-js';
@@ -14,7 +14,7 @@ function Orders() {
     const [orders,setOrders] = useState([])
     axios.defaults.withCedentials =true;
     useEffect(()=>{
-axios.get(`${BASE_URL}/api/orders/mine`).then((resp)=>{
+axios.get(`${process.env.REACT_APP_BASE_URL}/api/orders/mine`).then((resp)=>{
     console.log(resp.data);
     setOrders(resp.data)
 })
@@ -23,7 +23,7 @@ axios.get(`${BASE_URL}/api/orders/mine`).then((resp)=>{
     const paymentHandler= async (id,cartItems)=>{
         try {
             console.log(id,cartItems);
-const response = await axios.post(`${BASE_URL}/api/config/stripe/checkout-session`,{orderItems:cartItems,id,email:userInfo.email})          
+const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/config/stripe/checkout-session`,{orderItems:cartItems,id,email:userInfo.email})          
             
       if(response.data.session){
           const stripe = await stripePromise;
@@ -72,7 +72,7 @@ const response = await axios.post(`${BASE_URL}/api/config/stripe/checkout-sessio
                 <h6>Order Items:</h6>
                 {order.orderItems.map((item) => (
                   <div key={item._id} className="d-flex align-items-center mb-2">
-                    <img src={`${BASE_URL}/uploads/${item.image}`} alt={item.name} style={{ width: '100px', marginRight: '10px' }} />
+                    <img src={`${process.env.REACT_APP_BASE_URL}/uploads/${item.image}`} alt={item.name} style={{ width: '100px', marginRight: '10px' }} />
                     <div>
                       <h6>{item.name.slice(0, 60)}...</h6>
                       <p>Quantity: {item.qty}</p>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../constants'
+
 import axios from 'axios'
 import { Table } from 'react-bootstrap';
 function OrderList() {
@@ -10,7 +10,7 @@ function OrderList() {
     },[])
 
     const getAllOrders = ()=>{
-        axios.get(`${BASE_URL}/api/orders`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/orders`).then((resp)=>{
 console.log(resp.data);
 setallOrders(resp.data)
         }).catch((error)=>{
@@ -34,7 +34,7 @@ setallOrders(resp.data)
       <tbody>
         {allOrders.map((order)=>
         <tr>
-            <td><img src={`${BASE_URL}/uploads/${order.orderItems.image}`} alt="" style={{width:"100px",height:"100px"}}/></td>
+            <td><img src={`${process.env.REACT_APP_BASE_URL}/uploads/${order.orderItems.image}`} alt="" style={{width:"100px",height:"100px"}}/></td>
             <td>{order.orderItems.name}</td>
             <td>{order.user.username}</td>
             <td>{new Date(order.createdAt).toLocaleDateString()}</td>

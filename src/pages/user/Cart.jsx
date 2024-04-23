@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {Container,Row,Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import { BASE_URL } from '../../constants'
+
 import { FaTrashAlt } from "react-icons/fa";
 import {addToCart, removeFromCart } from '../../toolkit/cartSlice'
 import {useNavigate} from 'react-router-dom'
@@ -40,7 +40,7 @@ navigate('/shipping')
 {data.map((item)=>
 <div key={item._id} className='d-flex justify-content-center mb-1  p-2 border border-2 rounded'>
   <div style={{height:'5rem' ,width:"5rem"}}> 
-  <img src={`${BASE_URL}/uploads/${item.image}` } className=" w-100 h-100 object-fit-cover rounded" alt="" />
+  <img src={`${process.env.REACT_APP_BASE_URL}/uploads/${item.image}` } className=" w-100 h-100 object-fit-cover rounded" alt="" />
   </div>
   <div className='flex-grow-1'>
     <Link to={`/product/${item._id}`} className='text-decoration-none ms-3 ' style={{color:"hotpink"}}>

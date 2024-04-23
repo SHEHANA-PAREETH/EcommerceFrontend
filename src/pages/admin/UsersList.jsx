@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../constants'
+
 import axios from 'axios'
 import { Table } from 'react-bootstrap'
 import { FaPen } from "react-icons/fa";
@@ -20,7 +20,7 @@ getAllUsers()
   },[])
   const getAllUsers= async()=>{
 try{
-const resp = await axios.get(`${BASE_URL}/api/admin`)
+const resp = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/admin`)
 //console.log(resp.data);
 setUsersData(resp.data)
 }
@@ -54,7 +54,7 @@ const updatedUsers = usersData.map((user)=> user._id === id ?{...user,username:n
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, update it!"
       }).then(()=>{
-        axios.put(`${BASE_URL}/api/admin/${id}`, {username:newname})
+        axios.put(`${process.env.REACT_APP_BASE_URL}/api/admin/${id}`, {username:newname})
         .then(response => {
           // Handle success
           console.log('Updated successfully:', response.data);
@@ -93,7 +93,7 @@ const updatedUsers = usersData.map((user)=> user._id === id ?{...user,username:n
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, update it!"
       }).then(()=>{
-        axios.put(`${BASE_URL}/api/admin/${id}`, {email:newemail})
+        axios.put(`${process.env.REACT_APP_BASE_URL}/api/admin/${id}`, {email:newemail})
         .then(response => {
           // Handle success
           console.log('Updated successfully:', response.data);
@@ -116,9 +116,9 @@ const updatedUsers = usersData.map((user)=> user._id === id ?{...user,username:n
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       }).then(() => {
-        //req.query.id backend==>`${BASE_URL}/api/admin/`,{params:{id:id}}shown id value in url
+        //req.query.id backend==>`${process.env.REACT_APP_BASE_URL}/api/admin/`,{params:{id:id}}shown id value in url
     //shown like /:id in url
-        axios.delete(`${BASE_URL}/api/admin/${id}`).then((resp)=>{
+        axios.delete(`${process.env.REACT_APP_BASE_URL}/api/admin/${id}`).then((resp)=>{
           console.log(resp);
           if (resp.data && resp.data.message === "User removed.") {
             Swal.fire({

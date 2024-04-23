@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../constants'
+
 import axios from 'axios'
 import {Container,Row,Col} from 'react-bootstrap'
 import { Bar } from 'react-chartjs-2'
@@ -25,7 +25,7 @@ function AdminOrder() {
       getSalesByDate()
     },[])
     const getTotalOrders= () =>{
-      axios.get(`${BASE_URL}/api/orders/total-orders`).then((resp)=>{
+      axios.get(`${process.env.REACT_APP_BASE_URL}/api/orders/total-orders`).then((resp)=>{
         console.log(resp.data);
         setTotalOrders(resp.data.totalOrders
         )
@@ -33,21 +33,21 @@ function AdminOrder() {
   }
 
     const getTotalSales= () =>{
-      axios.get(`${BASE_URL}/api/orders/total-sales`).then((resp)=>{
+      axios.get(`${process.env.REACT_APP_BASE_URL}/api/orders/total-sales`).then((resp)=>{
         console.log(resp.data);
         setTotalSales(resp.data.totalSales.toFixed(2)
         )
     })
     } 
     const getTotalUsers= () =>{
-      axios.get(`${BASE_URL}/api/users/totalusers`).then((resp)=>{
+      axios.get(`${process.env.REACT_APP_BASE_URL}/api/users/totalusers`).then((resp)=>{
         console.log(resp.data);
         setTotalUsers(resp.data
         )
     })
     } 
     const  getSalesByDate=()=>{
-      axios.get(`${BASE_URL}/api/orders/total-sales-by-date`).then((resp)=>{
+      axios.get(`${process.env.REACT_APP_BASE_URL}/api/orders/total-sales-by-date`).then((resp)=>{
         console.log(resp.data.salesByDate);
         //setSalesData(resp.data.salesByDate)
         setChartData({labels: resp.data.salesByDate?.map((data) => data?._id), 

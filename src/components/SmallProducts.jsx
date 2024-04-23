@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect  } from 'react'
 import { Card ,Container,Row,Col} from 'react-bootstrap';
-import { BASE_URL } from '../constants';
+
 import { Link } from 'react-router-dom';
 function SmallProducts() {
     axios.defaults.withCredentials = true;
@@ -12,7 +12,7 @@ function SmallProducts() {
         getAllProducts()
     },[])
     const getAllProducts=()=>{
-        axios.get(`${BASE_URL}/api/product/allproducts`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/allproducts`).then((resp)=>{
             console.log(resp.data);
             setProductData(resp.data)
         })
@@ -25,7 +25,7 @@ function SmallProducts() {
 {productData.map((pdt)=>
   
         <Card style={{ width: '12rem',height:"15rem" }} >
-      <Card.Img className="w-100 h-50" variant="top" src={`${BASE_URL}/uploads/${pdt.image}`} />
+      <Card.Img className="w-100 h-50" variant="top" src={`${process.env.REACT_APP_BASE_URL}/uploads/${pdt.image}`} />
       <Card.Body>
         <p>{pdt.name.slice(0,30)}...</p>
       </Card.Body>

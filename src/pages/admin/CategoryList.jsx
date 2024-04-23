@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../constants'
+
 import axios from 'axios'
 import './CategoryList.css'
 
@@ -16,7 +16,7 @@ function CategoryList() {
 getallCategories()
     },[categoryName])
     const getallCategories=()=>{
-        axios.get(`${BASE_URL}/api/category/`).then((resp)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/`).then((resp)=>{
             //console.log(resp.data);
             setCategoryList(resp.data)
         })
@@ -37,7 +37,7 @@ setCategoryList(updatedCategoryList)
         // Reset the form after submission
     setCategoryName(e.target.value)
     console.log(categoryName);
-        const response = await axios.post(`${BASE_URL}/api/category/`, {
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/category/`, {
             name: categoryName
         });
         console.log('Category added successfully:', response.data);

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate ,useParams} from 'react-router-dom';
-import { BASE_URL } from '../../constants';
+
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +10,7 @@ function PymentSuccessPage() {
     const navigate=useNavigate()
    const {id} = useParams()
    useEffect(()=>{
-axios.put(`${BASE_URL}/api/orders/${id}/pay`,{id:id,
+axios.put(`${process.env.REACT_APP_BASE_URL}/api/orders/${id}/pay`,{id:id,
   status:"successfully paid",
   update_time:new Date(),
   emailAddress:userInfo.email}).then((resp)=>{

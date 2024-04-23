@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { BASE_URL } from '../../constants';
+;
 import  axios  from 'axios';
 import ProductCard from '../../components/ProductCard';
 import {Container,Row,Col,Card} from 'react-bootstrap'
@@ -14,7 +14,7 @@ getSinglePdtCategories()
     const getSinglePdtCategories=()=>{
         const categoryId =id;
         console.log(categoryId);
-axios.get(`${BASE_URL}/api/product/getpdtsbytcategory/${categoryId}`).then((resp)=>{
+axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/getpdtsbytcategory/${categoryId}`).then((resp)=>{
    // console.log(resp.data.pdts);
     setPdts(resp.data.pdts)
     console.log(pdts);

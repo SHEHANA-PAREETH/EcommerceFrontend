@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { BASE_URL } from '../../constants';
 import axios from 'axios';
 
 const Profile = () => {
@@ -14,7 +13,7 @@ axios.defaults.withCredentials = true;
 const handleSubmit=(e)=>{
   e.preventDefault()
 
-axios.put(`${BASE_URL}/api/users/profile`, {username,email,password})
+axios.put(`${process.env.REACT_APP_BASE_URL}/api/users/profile`, {username,email,password})
 .then(response => {
   console.log(response.data);
  

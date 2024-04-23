@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Form, Container,Row,Col, Button, Nav} from 'react-bootstrap'
 import SpinnerComponent from '../../components/SpinnerComponent'
-import { BASE_URL } from '../../constants'
+
 import axios from 'axios'
 import { setCredentials } from '../../toolkit/authSlice'
 import { UseDispatch, useDispatch } from 'react-redux'
@@ -20,7 +20,7 @@ e.preventDefault()
 console.log(email,password);
 setLoading(true)
 try {
-    const resp = await axios.post(`${BASE_URL}/api/users/auth`,{email,password})
+    const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/users/auth`,{email,password})
 console.log(resp.data);
 dispatch(setCredentials(resp.data))
 setLoading(false)

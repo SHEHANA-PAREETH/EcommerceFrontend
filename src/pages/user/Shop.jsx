@@ -5,7 +5,7 @@ import { useEffect,useState } from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import { setCategories, setProducts } from '../../toolkit/shopSlice'
 import  axios  from 'axios'
-import { BASE_URL } from '../../constants'
+
 import ProductCard from '../../components/ProductCard'
 import SpinnerComponent from '../../components/SpinnerComponent'
 import ProductCardShop from '../../components/ProductCardShop'
@@ -27,20 +27,20 @@ const [category,setCategory] = useState()
   
  },[category,selectedBrand,priceFilter])
  const getAllProducts=()=>{
-  axios.get(`${BASE_URL}/api/product/allproducts`).then((resp)=>{
+  axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/allproducts`).then((resp)=>{
       console.log(resp.data);
       dispatch(setProducts(resp.data)) 
   })
 }
  const getallCategories=()=>{
-  axios.get(`${BASE_URL}/api/category/`).then((resp)=>{
+  axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/`).then((resp)=>{
       //console.log(resp.data);
       
       dispatch(setCategories(resp.data))
   })
 }
 const fecthBrands=(value)=>{
-  axios.get(`${BASE_URL}/api/product/brands`,{params:{category:value}}).then((resp)=>{
+  axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/brands`,{params:{category:value}}).then((resp)=>{
     //console.log(resp.data);
     setbrands(Array.from(new Set(resp.data.brands)))
   
@@ -71,7 +71,7 @@ setSelectedBrand('')
  }
  const getFilteredProducts=()=>{
   
-  axios.post(`${BASE_URL}/api/product/filterd-products`,{category,brand:selectedBrand,price:priceFilter}).then((resp)=>{
+  axios.post(`${process.env.REACT_APP_BASE_URL}/api/product/filterd-products`,{category,brand:selectedBrand,price:priceFilter}).then((resp)=>{
     console.log(resp.data);
     if(resp.data){
       dispatch(setProducts(resp.data)) 

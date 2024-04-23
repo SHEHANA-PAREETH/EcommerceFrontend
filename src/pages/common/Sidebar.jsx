@@ -13,7 +13,6 @@ import { FaBagShopping } from "react-icons/fa6";
 import { CiUser } from "react-icons/ci";
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { BASE_URL } from '../../constants';
 import axios from 'axios';
 import { Badge } from 'react-bootstrap';
 import { ToastSuccess } from '../../plugins/toast';
@@ -30,7 +29,7 @@ axios.defaults.withCredentials = true;
   const handleLogout=async()=>{
  
     try{
-      const resp= await axios.post(`${BASE_URL}/api/users/logout`)
+      const resp= await axios.post(`${process.env.REACT_APP_BASE_URL}/api/users/logout`)
       console.log(resp);
       if(resp.data.msg && resp.data.msg === "logout successfully"){
         localStorage.clear()

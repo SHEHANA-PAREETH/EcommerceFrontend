@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Nav } from 'react-bootstrap';
-import { BASE_URL } from '../../constants';
 import axios from 'axios';
 import { ToastError, ToastSuccess } from '../../plugins/toast';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +70,7 @@ const togglePasswordVisibility = () => {
       // Proceed with form submission
       console.log('Form submitted:', formData);
       try {
-        const response = await axios.post(`${BASE_URL}/api/users`, formData);
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/users`, formData);
         console.log('Response:', response.data);
         if(response.data && response.data.message){
           ToastSuccess("successfully created account")

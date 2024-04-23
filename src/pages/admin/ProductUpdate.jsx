@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Container,Row,Col,Button,Form} from 'react-bootstrap'
 import AdminButtonGroup from './AdminButtonGroup'
 import { useParams } from 'react-router-dom';
-import { BASE_URL } from '../../constants';
 import axios from 'axios'
 import { ToastSuccess } from '../../plugins/toast';
 
@@ -18,7 +17,7 @@ getSingleProduct()
 getAllCategories()
   },[])
   const getSingleProduct=()=>{
-    axios.get(`${BASE_URL}/api/product/${id}`).then((resp)=>{
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/${id}`).then((resp)=>{
       console.log(resp.data);
 setData(resp.data)
     })
@@ -28,7 +27,7 @@ setData(resp.data)
     setData({ ...data, [name]: value });
   };
   const getAllCategories=()=>{
-    axios.get(`${BASE_URL}/api/category/`).then((resp)=>{
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/`).then((resp)=>{
       console.log(resp.data);
 setCategory(resp.data)
     })
@@ -50,7 +49,7 @@ setCategory(resp.data)
    }
    
    try {
-    const response = await axios.put(`${BASE_URL}/api/product/${id}`,data, {
+    const response = await axios.put(`${process.env.REACT_APP_BASE_URL}/api/product/${id}`,data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -75,7 +74,7 @@ setCategory(resp.data)
         <h1 className='text-center'>Update Product</h1>
         <Form  onSubmit={handleSubmit}>
         <div  style={{width:"100%"}} className='d-flex justify-content-center'>
-          {uploadedImage ? <img src={URL.createObjectURL(uploadedImage)} width="100"/> :<img   src={`${BASE_URL}/uploads/${data?.image}`} alt="" width="100"/>}
+          {uploadedImage ? <img src={URL.createObjectURL(uploadedImage)} width="100"/> :<img   src={`${process.env.REACT_APP_BASE_URL}/uploads/${data?.image}`} alt="" width="100"/>}
          
         
         </div>

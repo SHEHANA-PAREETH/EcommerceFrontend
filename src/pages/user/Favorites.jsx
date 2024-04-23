@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
-import { BASE_URL } from '../../constants';
+;
 import {Container, Row,Col,Button} from 'react-bootstrap'
 import axios from 'axios'
 import { Card } from 'react-bootstrap';
@@ -17,7 +17,7 @@ getFavProducts()
  },[favorites])
  axios.defaults.withCredentials = true;
  const getFavProducts=()=>{
-  axios.get(`${BASE_URL}/api/product/favpdts/${favorites.favoriteProducts.join(',')}`).then((res)=>{
+  axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/favpdts/${favorites.favoriteProducts.join(',')}`).then((res)=>{
     console.log(res.data);
     setFavPdts(res.data)
    
@@ -43,7 +43,7 @@ const removeHandler=(id)=>{
      
        
       
-        <Card.Img variant="top" src={`${BASE_URL}/uploads/${pdt.image}`} style={{ width: '150px',height:"150px" }} />
+        <Card.Img variant="top" src={`${process.env.REACT_APP_BASE_URL}/uploads/${pdt.image}`} style={{ width: '150px',height:"150px" }} />
 
         <Card.Body>
           <Card.Title>{pdt.name.slice(0,30)}</Card.Title>

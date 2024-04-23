@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { BASE_URL } from '../constants';
+
 import { ToastError, ToastSuccess } from '../plugins/toast';
 
 const RatingForm = ({id}) => {
@@ -33,7 +33,7 @@ const RatingForm = ({id}) => {
     console.log(comment,rating);
   if (formValid) {
         try {
-          const response = await axios.post(`${BASE_URL}/api/product/${id}/reviews`, { rating, comment });
+          const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/product/${id}/reviews`, { rating, comment });
           console.log('Review submitted:', response.data);
           // Add logic for success (e.g., show success message)
           if(response.data.message==="review added"){

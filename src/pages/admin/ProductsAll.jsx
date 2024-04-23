@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AdminButtonGroup from './AdminButtonGroup'
 import {Container, Row,Col, Button} from 'react-bootstrap'
-import { BASE_URL } from '../../constants'
+
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2';
@@ -14,7 +14,7 @@ function ProductsAll() {
         getAllProducts()
         },[])
         const getAllProducts=()=>{
-            axios.get(`${BASE_URL}/api/product/allproducts`).then((resp)=>{
+            axios.get(`${process.env.REACT_APP_BASE_URL}/api/product/allproducts`).then((resp)=>{
                 console.log(resp.data);
                 setProductData(resp.data)
             })
@@ -33,7 +33,7 @@ const handleUpdateProduct=(id)=>{
       }).then((result) => {
         if (result.isConfirmed) {
           // User confirmed, proceed with deletion
-          axios.delete(`${BASE_URL}/api/product/${id}`)
+          axios.delete(`${process.env.REACT_APP_BASE_URL}/api/product/${id}`)
             .then((response) => {
               // Handle success
               Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
@@ -73,7 +73,7 @@ const handleUpdateProduct=(id)=>{
         return(
 <Row className='d-flex text-center mt-4 align-items-center justify-content-center border border-1 rounded shadow-lg ' key={product._id}>
             <Col className='p-1'>
-        <img src={`${BASE_URL}/uploads/${product.image}`} alt="" width="250" height="250" />
+        <img src={`${process.env.REACT_APP_BASE_URL}/uploads/${product.image}`} alt="" width="250" height="250" />
         </Col >
         <Col style={{textAlign:"left"}}>
         <h4 >{product.name}</h4>
