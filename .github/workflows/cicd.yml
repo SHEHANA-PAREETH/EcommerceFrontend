@@ -19,10 +19,12 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+      - name: Stop existing container
+        run: docker stop reactjs-app-container || true
+      - name: Remove existing container
+        run: docker rm reactjs-app-container || true
       - name: Pull Image from Docker  hub
-        run: docker pull shehanapareeth/ecommerce-react-frontend 
-      - name: Delete Old Container
-        run: docker rm -f reactjs-app-container 
+        run: docker pull shehanapareeth/ecommerce-react-frontend  
       - name: Run Docker Container
         run: docker run  -p 3000:80 --name reactjs-app-container shehanapareeth/ecommerce-react-frontend 
       
