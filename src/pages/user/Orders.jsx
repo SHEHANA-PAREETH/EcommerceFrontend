@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios';
 import { Container, Row, Col, Card,Button } from 'react-bootstrap';
-import { loadStripe } from '@stripe/stripe-js';
+
 import { useSelector } from 'react-redux';
 
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+
 
 
 function Orders() {
@@ -26,13 +26,7 @@ axios.get(`${process.env.REACT_APP_BASE_URL}/api/orders/mine`).then((resp)=>{
 const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/config/stripe/checkout-session`,{orderItems:cartItems,id,email:userInfo.email})          
             
       if(response.data.session){
-          const stripe = await stripePromise;
-         const { error } = await stripe.redirectToCheckout({
-          sessionId: response.data.session.id
-        });   
-        if(error){
-          console.log(error);
-        }
+        window.location.href = response.data.session.url
       };
   
 
