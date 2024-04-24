@@ -25,3 +25,13 @@ jobs:
         run: docker rm -f reactjs-app-container 
       - name: Run Docker Container
         run: docker run  -p 3000:80 --name reactjs-app-container shehanapareeth/ecommerce-react-frontend 
+      - name: Clean up GitHub Actions artifacts
+        run: |
+          # Remove unnecessary files
+          rm -rf /path/to/temp/files/*
+
+          # Remove logs older than 7 days
+          find /path/to/logs/* -type f -mtime +7 -exec rm {} \;
+
+          # Remove build artifacts
+          rm -rf /path/to/build/artifacts/*
