@@ -2,8 +2,9 @@
 FROM node:alpine3.18 as build
 # Build app
 WORKDIR /app
-COPY package.json .
+COPY package*.json .
 RUN npm install
+
 COPY . .
 # Set the REACT_APP_API_URL environment variable
 ENV REACT_APP_BASE_URL=http://13.48.123.137:5000
