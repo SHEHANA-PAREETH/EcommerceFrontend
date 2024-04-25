@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:1.22-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
-COPY --from=builder /app/build .
+COPY --from=builde /app/build .
 EXPOSE 80
 ENTRYPOINT ["nginx","-g","daemon off;"]
 
