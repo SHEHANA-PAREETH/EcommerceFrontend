@@ -12,7 +12,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build Docker Image
-        run: docker build -t shehanapareeth/ecommerce-react-frontend  . 
+        run: docker build --build-arg REACT_APP_BASE_URL=http://13.48.123.137:5000 -t shehanapareeth/ecommerce-react-frontend  . 
       - name: Publish Image to docker hub
         run: docker push shehanapareeth/ecommerce-react-frontend:latest
   deploy:
