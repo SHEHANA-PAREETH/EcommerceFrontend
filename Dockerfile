@@ -13,7 +13,7 @@ RUN npm run build
 # Use the official Nginx 1.22 Alpine image for serving the app
 FROM nginx:1.23-alpine
 WORKDIR /usr/share/nginx/html
-RUN rm -rf *
+RUN rm -rf ./*
 COPY --from=build /app/build .
 EXPOSE 80
 ENTRYPOINT ["nginx","-g","daemon off;"]
