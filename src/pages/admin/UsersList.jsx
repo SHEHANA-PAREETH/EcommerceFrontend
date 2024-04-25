@@ -125,7 +125,10 @@ const updatedUsers = usersData.map((user)=> user._id === id ?{...user,username:n
               title: "Deleted!",
               text: "The file has been deleted.",
               icon: "success"
-            });
+            }).then(()=>{
+              const remainingUsers = usersData.filter((user)=>user._id !== id)
+              setUsersData(remainingUsers)
+            })
            // window.location.reload();
           }
         })
