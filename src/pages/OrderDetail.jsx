@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import client, { errorMessage } from '../api/client'
 import { dateTime, moneyExact, money, shortId } from '../api/format'
 import { useUi } from '../context/Ui'
@@ -29,6 +30,7 @@ export default function OrderDetail() {
   const { id } = useParams()
   const [params, setParams] = useSearchParams()
   const { toast, confirm } = useUi()
+  const me = useSelector((state) => state.auth.user)
   const order = useFetch(() => client.get(`/orders/${id}`).then((res) => res.data), [id])
   const [busy, setBusy] = useState('')
   const [verifying, setVerifying] = useState(false)
@@ -64,15 +66,24 @@ export default function OrderDetail() {
   if (order.loading && !o) return <div className="container page"><Skeleton style={{ height: 40, width: '40%' }} /><Skeleton style={{ height: 320, marginTop: 24 }} /></div>
   if (order.error) return <div className="container page"><ErrorBox message={order.error?.response?.status === 404 ? "We couldn't find that order." : errorMessage(order.error)} onRetry={order.retry} /></div>
 
-  const placed = params.get('placed') === '1'
-  const unpaidCard = o.paymentMethod === 'stripe' && !o.isPaid && o.status === 'processing'
+  // an admin can open any order, but only the buyer pays for or cancels it
+  const mine = String(o.user?._id || o.user) === String(me?._id)
+  const placed = mine && params.get('placed') === '1'
+  const unpaidCard = mine && o.paymentMethod === 'stripe' && !o.isPaid && o.status === 'processing'
   const a = o.shippingAddress
 
   return (
     <div className="container page">
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'My orders', to: '/orders' }, { label: `Order ${shortId(o._id)}` }]} />
 
-      {(placed || params.get('cancelled')) && (
+      {!mine && (
+        <div className="banner" role="status">
+          <Icon name="user" size={26} />
+          <div><strong>Viewing {o.user?.username || 'a customer'}'s order</strong><p>{o.user?.email} · You are signed in as an admin. Change the status from <Link to={`/admin/orders?open=${o._id}`}>Admin → Orders</Link>.</p></div>
+        </div>
+      )}
+
+      {(placed || (mine && params.get('cancelled'))) && (
         <div className={`banner ${params.get('cancelled') ? 'warn' : 'ok'}`} role="status">
           <Icon name={params.get('cancelled') ? 'alert' : 'check-circle'} size={26} />
           <div>
@@ -124,7 +135,7 @@ export default function OrderDetail() {
             <div className="total"><dt>Total</dt><dd>{moneyExact(o.totalPrice)}</dd></div>
           </dl>
           {unpaidCard && <button type="button" className="btn btn-primary btn-block btn-lg" onClick={pay} disabled={busy === 'pay'}><Icon name="card" size={18} /> {busy === 'pay' ? 'Opening payment…' : 'Pay now'}</button>}
-          {o.status === 'processing' && !o.isPaid && <button type="button" className="btn btn-ghost btn-block" onClick={cancel} disabled={busy === 'cancel'}>Cancel order</button>}
+          {mine && o.status === 'processing' && !o.isPaid && <button type="button" className="btn btn-ghost btn-block" onClick={cancel} disabled={busy === 'cancel'}>Cancel order</button>}
           <Link to="/shop" className="btn btn-soft btn-block">Continue shopping</Link>
         </aside>
       </div>
